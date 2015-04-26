@@ -28,7 +28,7 @@ module.exports = {
           var d = new Date(day_info.date);
           
           callback({
-            title: months[d.getMonth()] + ' ' + d.getDate() + ' ' + d.getFullYear(),
+            title: months[d.getUTCMonth()] + ' ' + d.getUTCDate() + ' ' + d.getUTCFullYear(),
             summary: day_info.event
           });
         }
