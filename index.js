@@ -56,8 +56,8 @@ app.get('/', function (req, res) {
         return;
       }
       
-      this_day(req.query.date_string, function(day_info) {
-        data.this_day = day_info;
+      this_day.get(req.query.date_string, function(day_info) {
+        data.snippets.push(day_info);
         res.send(data);
       });
     });
