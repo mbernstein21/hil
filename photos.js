@@ -16,7 +16,8 @@ module.exports = {
     api500px.photos.searchByGeo(
       lat + ',' + lng + ',' + radius + 'mi',
       {
-        'image_size[]': [600, 1600]
+        'image_size[]': [600, 1600],
+        exclude: 'Black and White'
       },
       function(error, results) {
         if (error) {
