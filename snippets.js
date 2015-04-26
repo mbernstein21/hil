@@ -21,13 +21,17 @@ var getSnippets = function(req, res, callback) {
     qs: queryParams
   };
   request(options, function(err, response, body) {
-    var formattedArray = JSON.parse(body).geonames;
-    formattedArray.forEach(function(value, index, array) {
-      if (value.summary === undefined) {
-        array.splice(index, 1);
-      }
-    });
-    callback(formattedArray);
+    if (err) {
+      callback({});
+    } else {
+      var formattedArray = JSON.parse(body).geonames;
+      formattedArray.forEach(function(value, index, array) {
+        if (value.summary === undefined) {
+          array.splice(index, 1);
+        }
+      });
+      callback(formattedArray);
+    }
   });
 };
 
