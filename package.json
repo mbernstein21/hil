@@ -11,7 +11,7 @@
   "dependencies": {
     "500px": "^0.5.1",
     "express": "^4.12.3",
-    "mongoose": "4.0.2",
+    "mongoose": "3.8.27",
     "request": "2.55.0"
   }
 }
