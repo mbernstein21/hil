@@ -4,7 +4,7 @@ var app = express();
 var photos = require('./photos');
 
 app.get('/', function (req, res) {
-  photos.get(42.3601, 71.0589, 1, function(photo) {
+  photos.get(req.query.latitude, req.query.longitude, 1, function(photo) {
     res.send(photo);
   })
 });
