@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-module.exports = function(snippets, guid, SnippetRecord) {
+module.exports = function(snippets, guid, coordinates, SnippetRecord) {
 
   snippets.forEach(function(snippet, index, array) {
     var url = snippet.wikipediaUrl || snippet.url || snippet.title;
@@ -17,11 +17,20 @@ module.exports = function(snippets, guid, SnippetRecord) {
           console.log("new record");
           SnippetRecord({
             guid: guid,
-            url: url
+            url: url,
+            loc: coordinates
           }).save();
         }
       }
     });
+    
+    SnippetRecord.where('loc').near({
+      center: {
+        type: 'Point',
+        coordinates: [42.369, -71.076]
+      },
+      maxDistance: 5
+    }).exec(console.log);
   });
 
   return snippets;

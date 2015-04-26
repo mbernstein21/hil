@@ -24,7 +24,11 @@ mongoose.connect(databaseUri, function (err, res) {
 
 var snippetSchema = new mongoose.Schema({
   guid: String,
-  url: String
+  url: String,
+  loc: {
+    type: [Number],
+    index: '2dsphere'
+  }
 });
 
 var SnippetRecord = mongoose.model('SnippetRecords', snippetSchema);
@@ -51,7 +55,7 @@ app.get('/', function (req, res) {
       var guid = req.query.guid;
       
       if (!req.query.date_string) {
-        data.snippets = snippetRecords(snippets, guid, SnippetRecord);
+        data.snippets = snippetRecords(snippets, guid, [req.query.latitude, req.query.longitude], SnippetRecord);
         res.send(data);
         return;
       }
@@ -62,7 +66,7 @@ app.get('/', function (req, res) {
         snippets = arrayShuffle(snippets, [day_info]);
         snippets.unshift(first);
         
-        data.snippets = snippetRecords(snippets, guid, SnippetRecord);
+        data.snippets = snippetRecords(snippets, guid, [req.query.latitude, req.query.longitude], SnippetRecord);
         res.send(data);
       });
     });
