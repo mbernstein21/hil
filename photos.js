@@ -6,7 +6,7 @@ module.exports = {
     api500px.photos.searchByGeo(
       lat + ',' + lng + ',' + radius + 'mi',
       {
-        image_size: 2048
+        image_size: 1600
       },
       function(error, results) {
         if (error) {
