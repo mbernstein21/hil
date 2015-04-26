@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "500px": "^0.5.1",
-    "express": "^4.12.3"
+    "express": "^4.12.3",
+    "request":"2.55.0"
   }
 }

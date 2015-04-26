@@ -1,4 +1,6 @@
 var express = require('express');
+var snippets = require('./snippets');
+var wikipedia
 var app = express();
 
 var photos = require('./photos');
@@ -8,8 +10,12 @@ app.get('/', function (req, res) {
   
   photos.get(req.query.latitude, req.query.longitude, 1, function(image) {
     data.image = image;
-    res.send(data);
-  })
+
+    snippets(req, res, function(snippets) {
+      data.snippets = snippets;
+      res.send(data);
+    });
+  });
 });
 
 var server = app.listen(3000, function () {
