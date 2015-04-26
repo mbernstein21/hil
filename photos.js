@@ -14,23 +14,23 @@ module.exports = {
           return;
         }
         
-        var photo = {};
+        var photos = [];
         
-        if (results.total_items > 0) {
-          photo = {
-            image_url: results.photos[0].image_url,
-            latitude: results.photos[0].latitude,
-            longitude: results.photos[0].longitude,
-            description: results.photos[0].description,
-            width: results.photos[0].width,
-            height: results.photos[0].height,
-            nsfw: results.photos[0].nsfw,
-            url: 'https://500px.com' + results.photos[0].url,
-            photographer: results.photos[0].user.fullname,
-          };
+        for (var i = 0; i < results.photos.length; i++) {
+          photos.push({
+            image_url: results.photos[i].image_url,
+            latitude: results.photos[i].latitude,
+            longitude: results.photos[i].longitude,
+            description: results.photos[i].description,
+            width: results.photos[i].width,
+            height: results.photos[i].height,
+            nsfw: results.photos[i].nsfw,
+            url: 'https://500px.com' + results.photos[i].url,
+            photographer: results.photos[i].user.fullname,
+          });
         }
         
-        callback(photo);
+        callback(photos);
       }
     );
   }

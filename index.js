@@ -13,8 +13,10 @@ app.get('/', function (req, res) {
     return;
   }
   
-  photos.get(req.query.latitude, req.query.longitude, 1, function(image) {
-    data.image = image;
+  photos.get(req.query.latitude, req.query.longitude, 1, function(images) {
+    if (images.length) {
+      data.image = images[0];
+    }
 
     snippets(req, res, function(snippets) {
       data.snippets = snippets;
