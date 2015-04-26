@@ -11,6 +11,7 @@ module.exports = {
       function(error, results) {
         if (error) {
           callback(error);
+          return;
         }
         
         var photo = {};
