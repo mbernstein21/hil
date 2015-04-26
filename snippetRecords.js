@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 module.exports = function(snippets, guid, SnippetRecord) {
 
   snippets.forEach(function(snippet, index, array) {
-    var url = snippet.wikipediaUrl || snippet.url;
+    var url = snippet.wikipediaUrl || snippet.url || snippet.title;
     var query = SnippetRecord.find({
       'guid': guid,
       'url': url
