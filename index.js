@@ -8,6 +8,11 @@ var photos = require('./photos');
 app.get('/', function (req, res) {
   var data = {};
   
+  if (!req.query.latitude || !req.query.longitude) {
+    res.send(data);
+    return;
+  }
+  
   photos.get(req.query.latitude, req.query.longitude, 1, function(image) {
     data.image = image;
 
