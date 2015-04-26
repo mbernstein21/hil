@@ -16,10 +16,12 @@ var getSnippets = function(req, res, callback) {
     style: 'full',
     maxRows: '25'
   };
+
   var options = {
     url: 'http://api.geonames.org/findNearbyWikipediaJSON',
     qs: queryParams
   };
+
   request(options, function(err, response, body) {
     if (err) {
       callback({});

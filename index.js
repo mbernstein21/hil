@@ -1,10 +1,32 @@
 var express = require('express');
+var mongoose = require('mongoose');
 var wikipedia;
 var app = express();
 
 var snippets = require('./snippets');
 var photos = require('./photos');
 var arrayShuffle = require('./array_shuffle');
+var snippetRecords = require('./snippetRecords');
+
+var databaseUri =
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/HelloMongoose';
+
+mongoose.connect(databaseUri, function (err, res) {
+  if (err) {
+  console.log ('ERROR connecting to: ' + databaseUri + '. ' + err);
+  } else {
+  console.log ('Succeeded connected to: ' + databaseUri);
+  }
+});
+
+var snippetSchema = new mongoose.Schema({
+  guid: String,
+  url: String
+});
+
+var SnippetRecord = mongoose.model('SnippetRecords', snippetSchema);
 
 app.get('/', function (req, res) {
   var data = {};
@@ -25,8 +47,8 @@ app.get('/', function (req, res) {
       var first = snippets.shift();
       snippets = arrayShuffle(snippets, images);
       snippets.unshift(first);
-      
-      data.snippets = snippets;
+      var guid = req.query.guid;
+      data.snippets = snippetRecords(snippets, guid, SnippetRecord);
       res.send(data);
     });
   });
