@@ -4,6 +4,7 @@ var wikipedia;
 var app = express();
 
 var photos = require('./photos');
+var array_shuffle = require('./array_shuffle');
 
 app.get('/', function (req, res) {
   var data = {};
@@ -11,16 +12,6 @@ app.get('/', function (req, res) {
   if (!req.query.latitude || !req.query.longitude) {
     res.send(data);
     return;
-  }
-  
-  // From http://stackoverflow.com/a/6274381
-  function shuffle(arr) {
-    for (
-      var j, x, i = arr.length;
-      i;
-      j = Math.floor(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x
-    );
-    return arr;
   }
   
   photos.get(req.query.latitude, req.query.longitude, 1, function(images) {
@@ -33,7 +24,7 @@ app.get('/', function (req, res) {
       // snippet is always a text snippet
       var first = snippets.shift();
       snippets = snippets.concat(images);
-      snippets = shuffle(snippets);
+      snippets = array_shuffle(snippets);
       snippets.unshift(first)
       
       data.snippets = snippets;
