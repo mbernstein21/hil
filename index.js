@@ -1,6 +1,6 @@
 var express = require('express');
 var snippets = require('./snippets');
-var wikipedia
+var wikipedia;
 var app = express();
 
 var photos = require('./photos');
