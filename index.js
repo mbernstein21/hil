@@ -1,10 +1,10 @@
 var express = require('express');
-var snippets = require('./snippets');
 var wikipedia;
 var app = express();
 
+var snippets = require('./snippets');
 var photos = require('./photos');
-var array_shuffle = require('./array_shuffle');
+var arrayShuffle = require('./array_shuffle');
 
 app.get('/', function (req, res) {
   var data = {};
@@ -23,9 +23,8 @@ app.get('/', function (req, res) {
       // Shuffle images into the snippets array and make sure the first 
       // snippet is always a text snippet
       var first = snippets.shift();
-      snippets = snippets.concat(images);
-      snippets = array_shuffle(snippets);
-      snippets.unshift(first)
+      snippets = arrayShuffle(snippets, images);
+      snippets.unshift(first);
       
       data.snippets = snippets;
       res.send(data);
