@@ -14,7 +14,7 @@ var getSnippets = function(req, res, callback) {
     username: 'mbernstein21',
     radius: '20',
     style: 'full',
-    maxRows: '2'
+    maxRows: '25'
   };
   var options = {
     url: 'http://api.geonames.org/findNearbyWikipediaJSON',
