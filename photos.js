@@ -26,8 +26,8 @@ module.exports = {
             nsfw: results.photos[0].nsfw,
             url: 'https://500px.com' + results.photos[0].url,
             photographer: results.photos[0].user.fullname,
-          }
-        };
+          };
+        }
         
         callback(photo);
       }
