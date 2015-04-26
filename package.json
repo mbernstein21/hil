@@ -1,0 +1,14 @@
+{
+  "name": "hil",
+  "version": "0.0.1",
+  "description": "Here I Learned app for the Kayak What The Hack event.",
+  "main": "index.js",
+  "scripts": {
+    "test": "tests"
+  },
+  "author": "Teddy Wing, Michael Bernstein, and Nathan Fennel",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.12.3"
+  }
+}
