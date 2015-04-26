@@ -27,20 +27,24 @@ module.exports = {
         var photos = [];
         var photos_count = results.photos.length > MAX_PHOTOS_COUNT ? MAX_PHOTOS_COUNT : results.photos.length;
         
-        for (var i = 0; i < photos_count; i++) {
-          photos.push({
-            image_url: i === 0 ? results.photos[i].image_url[pick_image('large')] :
-              results.photos[i].image_url[pick_image('medium')],
-            latitude: results.photos[i].latitude,
-            longitude: results.photos[i].longitude,
-            summary: results.photos[i].description || '',
-            title: results.photos[i].name || '',
-            width: results.photos[i].width,
-            height: results.photos[i].height,
-            nsfw: results.photos[i].nsfw,
-            url: 'https://500px.com' + results.photos[i].url,
-            photographer: results.photos[i].user.fullname,
-          });
+        var i = 0;
+        while (photos.length < photos_count) {
+          if (!results.photos[i].nsfw) {
+            photos.push({
+              image_url: i === 0 ? results.photos[i].image_url[pick_image('large')] :
+                results.photos[i].image_url[pick_image('medium')],
+              latitude: results.photos[i].latitude,
+              longitude: results.photos[i].longitude,
+              summary: results.photos[i].description || '',
+              title: results.photos[i].name || '',
+              width: results.photos[i].width,
+              height: results.photos[i].height,
+              nsfw: results.photos[i].nsfw,
+              url: 'https://500px.com' + results.photos[i].url,
+              photographer: results.photos[i].user.fullname,
+            });
+          }
+          i++;
         }
         
         callback(photos);
