@@ -1,8 +1,12 @@
 var express = require('express');
 var app = express();
 
+var photos = require('./photos');
+
 app.get('/', function (req, res) {
-  res.send('Hello World!');
+  photos.get(42.3601, 71.0589, 1, function(photo) {
+    res.send(photo);
+  })
 });
 
 var server = app.listen(3000, function () {
