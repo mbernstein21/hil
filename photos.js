@@ -24,10 +24,10 @@ module.exports = {
             width: results.photos[0].width,
             height: results.photos[0].height,
             nsfw: results.photos[0].nsfw,
-            url: results.photos[0].url,
+            url: 'https://500px.com' + results.photos[0].url,
             photographer: results.photos[0].user.fullname,
           }
-        }
+        };
         
         callback(photo);
       }
