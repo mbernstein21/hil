@@ -7,6 +7,7 @@ var snippets = require('./snippets');
 var photos = require('./photos');
 var arrayShuffle = require('./array_shuffle');
 var snippetRecords = require('./snippetRecords');
+var this_day = require('./this-day-in-history');
 
 var databaseUri =
   process.env.MONGOLAB_URI ||
@@ -49,7 +50,16 @@ app.get('/', function (req, res) {
       snippets.unshift(first);
       var guid = req.query.guid;
       data.snippets = snippetRecords(snippets, guid, SnippetRecord);
-      res.send(data);
+      
+      if (!req.query.date_string) {
+        res.send(data);
+        return;
+      }
+      
+      this_day(req.query.date_string, function(day_info) {
+        data.this_day = day_info;
+        res.send(data);
+      });
     });
   });
 });
