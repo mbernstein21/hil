@@ -49,15 +49,20 @@ app.get('/', function (req, res) {
       snippets = arrayShuffle(snippets, images);
       snippets.unshift(first);
       var guid = req.query.guid;
-      data.snippets = snippetRecords(snippets, guid, SnippetRecord);
       
       if (!req.query.date_string) {
+        data.snippets = snippetRecords(snippets, guid, SnippetRecord);
         res.send(data);
         return;
       }
       
       this_day.get(req.query.date_string, function(day_info) {
-        data.snippets.push(day_info);
+        snippets.push(day_info);
+        var first = snippets.shift();
+        snippets = arrayShuffle(snippets, [day_info]);
+        snippets.unshift(first);
+        
+        data.snippets = snippetRecords(snippets, guid, SnippetRecord);
         res.send(data);
       });
     });
