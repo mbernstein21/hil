@@ -1,4 +1,18 @@
 var request = require('request');
+var months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+]
 
 module.exports = {
   get: function(date_string, callback) {
@@ -10,7 +24,13 @@ module.exports = {
           callback({});
         }
         else {
-          callback(JSON.parse(response));
+          var day_info = JSON.parse(response.body);
+          var d = new Date(day_info.date);
+          
+          callback({
+            title: months[d.getMonth()] + ' ' + d.getDate() + ' ' + d.getFullYear(),
+            summary: day_info.event
+          });
         }
       });
     }
