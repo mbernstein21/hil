@@ -1,8 +1,13 @@
 var express = require('express');
+var snippets = require('./snippets');
+var wikipedia
 var app = express();
 
 app.get('/', function (req, res) {
-  res.send('Hello World!');
+
+  snippets(req, res, function(responseThing) {
+    res.send(responseThing);
+  });
 });
 
 var server = app.listen(3000, function () {
